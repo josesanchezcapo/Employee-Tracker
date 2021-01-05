@@ -1,6 +1,6 @@
 USE employee_tracker;
 
------ department seed -----
+-- department seed --
 
 INSERT INTO department (id, name)
 VALUES (1, "1100 - Client Support");
@@ -14,7 +14,7 @@ VALUES (3, "1501 - Benefits");
 INSERT INTO department (id, name)
 VALUES (4, "1700 - Tax");
 
------ role seed -----
+-- role seed --
 
 INSERT INTO role (id, title, salary, department_id)
 VALUES (1, "Customer Service", 60000, 1);
@@ -43,7 +43,7 @@ VALUES (8, "HR Consultant", 60000, 3);
 INSERT INTO role (id, title, salary, department_id)
 VALUES (9, "Revenue Manager", 110000, 4);
 
------ employees seed  -----
+-- employees seed  --
 
 INSERT INTO employee (id, first_name, last_name, role_id, manager_id)
 VALUES (1, "Shmi", "Skywalker", 1, null);
