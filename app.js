@@ -2,6 +2,8 @@
 const mysql = require("mysql");
 const inquirer = require("inquirer");
 const consoleTable = require("console.table");
+const { exclude } = require("inquirer/lib/objects/separator");
+const Choices = require("inquirer/lib/objects/choices");
 
 // database connection 
 const connection = mysql.createConnection({
@@ -12,11 +14,29 @@ const connection = mysql.createConnection({
     database: 'employee_tracker'
 });
 
-// testing connection
+// open connection
 connection.connect(function(err) {
     if (err) {
       return console.error('error: ' + err.message);
     }
   
-    console.log('Connected to the MySQL server.');
+    // Testing - console.log('Connected to the MySQL server.');
+    
   });
+
+  function mainMenu(){
+
+    inquirer.prompt({
+      name: 'action',
+      type: 'list',
+      message: 'Employee Tracker : Main Menu',
+      Choices: [
+
+      ]
+      
+    }) .then((responses) => {
+
+
+    })
+  }
+
