@@ -1,0 +1,24 @@
+{
+  "name": "bc12-employee-tracker",
+  "version": "1.0.0",
+  "description": "Unit 12 MySQL Homework: Employee Tracker (Jose Sanchez-Capo)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/josesanchezcapo/bc12-employee-tracker.git"
+  },
+  "author": "Jose Sanchez-Capo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/josesanchezcapo/bc12-employee-tracker/issues"
+  },
+  "homepage": "https://github.com/josesanchezcapo/bc12-employee-tracker#readme",
+  "dependencies": {
+    "console.table": "^0.10.0",
+    "inquirer": "^7.3.3",
+    "mysql": "^2.18.1"
+  }
+}
