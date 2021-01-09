@@ -31,7 +31,19 @@ connection.connect(function(err) {
       type: 'list',
       message: 'Employee Tracker : Main Menu',
       Choices: [
-
+        'all employees',
+        'View all employees by role',
+        'View all employees by department',
+        'View all employees by manager',
+        "Add employee",
+        "Add role",
+        "Add department",
+        "Update employee role",
+        "Update employee manager",
+        "Delete employee",
+        "Delete role",
+        "Delete department",
+        "View department budgets"
       ]
       
     }) .then((responses) => {
