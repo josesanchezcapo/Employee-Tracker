@@ -45,26 +45,26 @@ VALUES ("Revenue Manager", 110000, 4);
 
 -- employees seed  --
 
-INSERT INTO employee (first_name, last_name, role_manager_id)
-VALUES ("Shmi", "Skywalker", 1, null);
+INSERT INTO employee (first_name, last_name, role_id )
+VALUES ("Shmi", "Skywalker", 1);
 
-INSERT INTO employee (first_name, last_name, role_manager_id)
-VALUES ("Anakin", "Skywalker", 2, null);
+INSERT INTO employee (first_name, last_name, role_id )
+VALUES ("Anakin", "Skywalker", 2);
 
-INSERT INTO employee (first_name, last_name, role_manager_id)
-VALUES ("Luke", "Skywalker", 3, null);
+INSERT INTO employee (first_name, last_name, role_id )
+VALUES ("Luke", "Skywalker", 3);
 
-INSERT INTO employee (first_name, last_name, role_manager_id)
-VALUES ("Cere", "Junda", 4, null);
+INSERT INTO employee (first_name, last_name, role_id )
+VALUES ("Cere", "Junda", 4);
 
-INSERT INTO employee (first_name, last_name, role_manager_id)
+INSERT INTO employee (first_name, last_name, role_id ,manager_id)
 VALUES ("Mace", "Windu", 5, 1);
 
-INSERT INTO employee (first_name, last_name, role_manager_id)
+INSERT INTO employee (first_name, last_name, role_id ,manager_id)
 VALUES ("Rey", "", 6, 2);
 
-INSERT INTO employee (first_name, last_name, role_manager_id)
+INSERT INTO employee (first_name, last_name, role_id ,manager_id)
 VALUES ("Qui-Gon", "Jinn", 7, 1);
 
-INSERT INTO employee (first_name, last_name, role_manager_id)
+INSERT INTO employee (first_name, last_name, role_id ,manager_id)
 VALUES ("Obi-Wan", "Kenobi", 8, 9);
