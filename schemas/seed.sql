@@ -1,4 +1,5 @@
 USE employee_tracker;
+SET FOREIGN_KEY_CHECKS=0;
 
 -- department seed --
 
