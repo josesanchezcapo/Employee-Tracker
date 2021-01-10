@@ -55,6 +55,9 @@ const mainMenu = function () {
       case 'Add Department':
         addDepartment();
         break;
+      case 'Add Role':
+        addRole();
+        break;
     }
 
   });
@@ -112,27 +115,94 @@ const mainMenu = function () {
   };
 
   function addDepartment() {
+    inquirer.prompt([
+      {
+        type: 'input',
+        name: 'newDepartment',
+        message: 'Please enter the department Name'
+      }
+    ]).then((response) => {
+
+      connection.query("INSERT INTO department SET ?",
+        {
+          departmentName: response.newDepartment
+        },
+        function (err, res) {
+          if (err) return err;
+          console.clear();
+          console.log("Department added")
+        });
+      viewAllDepartments();
+      mainMenu();
+    });
+  };
+
+  function addRole() {
+
+    connection.query("SELECT departmentName FROM department;", function (err, res) {
+      if (err) throw err;
+
       inquirer.prompt([
         {
           type: 'input',
-          name: 'newDepartment',
-          message: 'Please enter the department Name'
-        }
-      ]).then((response) => {
-
-        connection.query("INSERT INTO department SET ?",
-          {
-            departmentName: response.newDepartment
+          name: 'newTitle',
+          message: 'Please enter the Role/Title Name'
+        },
+        {
+          type: 'input',
+          name: 'newSalary',
+          message: 'Please enter the Salary for the Role/Title'
+        },
+        {
+          type: 'list',
+          name: 'department',
+          choices: function () {
+            const departmentName = []
+            for (var i = 0; i < res.length; i++) {
+              departmentName.push(res[i].departmentName);
+            }
+            return departmentName;
           },
-          function (err, res) {
-            if (err) return err;
-            console.clear();
-            console.log("Department added")
-          });
-        viewAllDepartments();
-        mainMenu();
+          message: "Select the department"
+        }
+      ]).then((responses) => {
+
+        const department = "SELECT id FROM department WHERE departmentName = ?";
+
+        let id;
+
+        connection.query(department, [responses.department], function (err, queryResult) {
+
+          for (i = 0; i < queryResult.length; i++) {
+
+            department_id = queryResult[i].id;
+
+          }
+          connection.query("INSERT INTO role SET ?",
+            {
+              title: responses.newTitle,
+              salary: responses.newSalary,
+              department_id: department_id
+            },
+
+            function (err, res) {
+              if (err) return err;
+              console.clear();
+              console.log("Role added")
+
+            });
+
+          viewAllRoles();
+          mainMenu();
+
+        });
+
       });
-    };
+
+    });
+
   };
+  
+};
 
 mainMenu();
