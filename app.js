@@ -52,6 +52,9 @@ const mainMenu = function () {
       case 'View all roles':
         viewAllRoles();
         break;
+      case 'Add Department':
+        addDepartment();
+        break;
     }
 
   });
@@ -94,9 +97,9 @@ const mainMenu = function () {
   function viewAllRoles() {
 
     const query = "SELECT role.id AS 'Role Id' , role.title as Title," +
-    "CONCAT('$', FORMAT(role.salary, 2)) AS Salary, department.departmentName AS 'Department Name' " +
-    "FROM role " +
-    "LEFT JOIN department ON role.department_id = department.id;"
+      "CONCAT('$', FORMAT(role.salary, 2)) AS Salary, department.departmentName AS 'Department Name' " +
+      "FROM role " +
+      "LEFT JOIN department ON role.department_id = department.id;"
 
     connection.query(query, function (err, res) {
       if (err) return err;
@@ -108,6 +111,28 @@ const mainMenu = function () {
 
   };
 
-};
+  function addDepartment() {
+      inquirer.prompt([
+        {
+          type: 'input',
+          name: 'newDepartment',
+          message: 'Please enter the department Name'
+        }
+      ]).then((response) => {
+
+        connection.query("INSERT INTO department SET ?",
+          {
+            departmentName: response.newDepartment
+          },
+          function (err, res) {
+            if (err) return err;
+            console.clear();
+            console.log("Department added")
+          });
+        viewAllDepartments();
+        mainMenu();
+      });
+    };
+  };
 
 mainMenu();
