@@ -2,8 +2,6 @@
 const mysql = require('mysql');
 const inquirer = require('inquirer');
 const consoleTable = require('console.table');
-//const { exclude } = require('inquirer/lib/objects/separator');
-//const Choices = require('inquirer/lib/objects/choices');
 
 // database connection 
 const connection = mysql.createConnection({
