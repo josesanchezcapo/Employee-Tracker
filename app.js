@@ -269,17 +269,17 @@ const mainMenu = function () {
 
             });
 
-        viewAllEmployees();
-        mainMenu();
+          viewAllEmployees();
+          mainMenu();
+
+        });
 
       });
 
     });
 
-  });
+  };
 
 };
-
-  };
 
 mainMenu();
