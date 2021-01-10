@@ -58,6 +58,10 @@ const mainMenu = function () {
       case 'Add Role':
         addRole();
         break;
+
+      case 'Add Employee':
+        addEmployee();
+        break;
     }
 
   });
@@ -202,7 +206,80 @@ const mainMenu = function () {
     });
 
   };
-  
+
+  function addEmployee() {
+
+    connection.query("SELECT title FROM role;", function (err, res) {
+      if (err) throw err;
+
+      inquirer.prompt([
+        {
+          type: 'input',
+          name: 'first_name',
+          message: 'Please enter Employee first name'
+        },
+        {
+          type: 'input',
+          name: 'last_name',
+          message: 'Please enter Employee last name'
+        },
+        {
+          type: 'list',
+          name: 'role',
+          choices: function () {
+            const title = []
+            for (var i = 0; i < res.length; i++) {
+              title.push(res[i].title);
+            }
+            return title;
+          },
+          message: "Select the Employee title"
+        },
+        {
+          type: 'input',
+          name: 'manager',
+          message: 'Enter Manager ID'
+        }
+
+      ]).then((responses) => {
+
+        const role = "SELECT id FROM role WHERE title = ?";
+
+        let role_id;
+
+        connection.query(role, [responses.role], function (err, queryResult) {
+
+          for (i = 0; i < queryResult.length; i++) {
+
+            role_id = queryResult[i].id;
+
+          }
+          connection.query("INSERT INTO employee SET ?",
+            {
+              first_name: responses.first_name,
+              last_name: responses.last_name,
+              role_id: role_id,
+              manager_id: responses.manager
+            },
+
+            function (err, res) {
+              if (err) return err;
+              console.clear();
+              console.log("Employee added")
+
+            });
+
+        viewAllEmployees();
+        mainMenu();
+
+      });
+
+    });
+
+  });
+
 };
+
+  };
 
 mainMenu();
