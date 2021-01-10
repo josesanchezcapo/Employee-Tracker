@@ -91,6 +91,23 @@ const mainMenu = function () {
 
   };
 
+  function viewAllRoles() {
+
+    const query = "SELECT role.id AS 'Role Id' , role.title as Title," +
+    "CONCAT('$', FORMAT(role.salary, 2)) AS Salary, department.departmentName AS 'Department Name' " +
+    "FROM role " +
+    "LEFT JOIN department ON role.department_id = department.id;"
+
+    connection.query(query, function (err, res) {
+      if (err) return err;
+      console.log("\n");
+      console.table(res);
+      mainMenu();
+
+    });
+
+  };
+
 };
 
 mainMenu();
