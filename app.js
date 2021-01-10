@@ -46,10 +46,14 @@ const mainMenu = function () {
       case 'View all employees':
         viewAllEmployees();
         break;
-      case 'View all employees':
+      case 'View all department':
         viewAllDepartments();
         break;
+      case 'View all roles':
+        viewAllRoles();
+        break;
     }
+
   });
 
   function viewAllEmployees() {
@@ -71,13 +75,19 @@ const mainMenu = function () {
       mainMenu();
 
     });
+  };
 
-    function viewAllDepartments() {
+  function viewAllDepartments() {
 
-      const query = "";
+    const query = "SELECT id AS 'Department ID', departmentName AS 'Department Name' FROM department;"
 
+    connection.query(query, function (err, res) {
+      if (err) return err;
+      console.log("\n");
+      console.table(res);
+      mainMenu();
 
-    };
+    });
 
   };
 

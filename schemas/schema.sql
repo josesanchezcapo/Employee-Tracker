@@ -1,3 +1,4 @@
+SET FOREIGN_KEY_CHECKS=0;
 DROP DATABASE IF EXISTS employee_tracker;
 
 CREATE DATABASE employee_tracker;
