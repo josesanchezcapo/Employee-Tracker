@@ -12,7 +12,7 @@ Create a basic Content Management Systems, "Employee Tracker". To build a soluti
 * [License](#License)   
 ````
 ## Demo
-
+![demo](./Assets/Demo2.gif)
 ## Database schema:
 
 ![Database Schema](./Assets/schema.png)
