@@ -30,7 +30,7 @@ For any questions, please reach out to me:
 ````
 ````
 ## Lincense
-* MIT License
+* GNU GENERAL PUBLIC LICENSE
 ````
 
 
