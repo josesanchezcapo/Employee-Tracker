@@ -286,59 +286,65 @@ const mainMenu = function () {
 
   function updateEmployeeRole() {
 
-    connection.query("SELECT employee.last_name, role.title FROM employee JOIN role ON employee.role_id = role.id;", function(err, res) {
-       if (err) throw err
-       console.log(res)
-      inquirer.prompt([
-            {
-              name: "lastName",
-              type: "rawlist",
-              choices: function() {
-                var lastName = [];
-                for (var i = 0; i < res.length; i++) {
-                  lastName.push(res[i].last_name);
-                }
-                return lastName;
+    connection.query("SELECT employee.id, employee.first_name, employee.last_name,  role.title " +
+      " FROM employee " +
+      "LEFT JOIN role ON employee.role_id =  role.id;", function (err, res) {
+
+        if (err) throw err;
+
+        inquirer.prompt([
+
+          {
+            type: 'list',
+            name: 'employeeRole',
+            choices: function () {
+              const employee = []
+              for (var i = 0; i < res.length; i++) {
+
+
+                employee.push(res[i].id + ' -  Employee Name: ' + res[i].first_name + ' ' + res[i].last_name +
+                  ' Title: ' + res[i].title);
+
+              }
+              return employee;
+            },
+            message: "Select the Employee"
+          },
+          {
+            type: 'list',
+            name: 'newRole',
+            choices: function () {
+
+            },
+
+            message: 'Enter New Role'
+          }
+
+        ]).then((response) => {
+
+            connection.query("UPDATE employee SET WHERE ?",
+
+              {
+
+                first_name: employee.first_name,
+
               },
-              message: "What is the Employee's last name? ",
-            },
-            {
-              name: "role",
-              type: "rawlist",
-              message: "What is the Employees new title? ",
-              choices: selectRole()
-            },
-        ]).then(function(val) {
-          var roleId = selectRole().indexOf(val.role) + 1
-          connection.query("UPDATE employee SET WHERE ?", 
-          {
-            last_name: val.lastName
-             
-          }, 
-          {
-            role_id: roleId
-             
-          }, 
-          function(err){
-              if (err) throw err
-              console.table(val)
-              startPrompt()
-          })
-    
+              {
+                role_id: response.newRole
+              },
+            
+          function(err) {
+            if (err) throw err
+            console.table(response)
+            console.log("Record Updaated");
+          viewAllEmployees();
+          mainMenu();
+
+          });
       });
-    });
-  
-    }
-    function selectRole() {
-      connection.query("SELECT * FROM role", function(err, res) {
-        if (err) throw err
-        for (var i = 0; i < res.length; i++) {
-          roleArr.push(res[i].title);
-        }
-    
-      })
-      return roleArr;
-    }
+  });
+};
+
 
 
 
